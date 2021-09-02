@@ -1,0 +1,36 @@
+name: Eslint & Coverage
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+      - release/*
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Install
+        run: npm ci # OR: yarn
+      - name: Run eslint on changed files
+        uses: tj-actions/eslint-changed-files@v6.5
+        with:
+          config_path: 'eslint/eslint-jest.js'
+          ignore_path: '.eslintignore'
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Install modules
+        run: npm i --silent
+      - name: Run tests
+        run: npm run test
+      - name: Code Coverage Report
+        uses: vebr/jest-lcov-reporter@v0.2.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          lcov-file: ./coverage/lcov.info

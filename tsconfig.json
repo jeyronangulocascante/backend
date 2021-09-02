@@ -1,0 +1,29 @@
+{
+  "extends": "./tsconfig.paths.json",
+  "compilerOptions": {
+    "lib": ["ES2020"],
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "target": "es2020",
+    "module": "commonjs",
+    "outDir": "lib",
+    // fix for https://github.com/serverless/typescript/issues/27#issuecomment-779688158
+    "skipLibCheck": true,
+    // fix for https://github.com/middyjs/middy/issues/203
+    "esModuleInterop": true
+  },
+  "include": ["src/*.ts", "src/**/*.ts", "./tests/**/**/*", "./*.ts"],
+  "exclude": [
+    "node_modules/**/*",
+    ".serverless/**/*",
+    ".webpack/**/*",
+    "_warmup/**/*",
+    ".vscode/**/*"
+  ],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
+}

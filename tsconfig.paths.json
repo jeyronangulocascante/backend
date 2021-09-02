@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@module/*": ["src/module_example/*"],
+      "@services/*": ["src/services/*"],
+      "@logger/*": ["src/logger/*"],
+      "@tests/*": ["tests/*"]
+    }
+  }
+}
